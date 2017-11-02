@@ -25,7 +25,7 @@
         
         function keyPressed(){
             background(mouseX/2,mouseY/2,0) //background changes color when you hit any key
-            ellipse(mouseX,mouseY,100,100) // an ellipse is made when you hit a key (too)
+            ellipse(mouseX,mouseY,100,100) // an ellipse is made when you hit a key
         }
         
         function mousePressed() {
