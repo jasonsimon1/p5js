@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        var r,g,b;
+        var paused
+        var ballX;
+        var ballY;
+        var ballSpeedX = 5;
+        var ballSpeedY = 5;
+        var paddleHeight = 30;
+        var minute = 0;
+        var xSpeed = 1;
+
+        function setup() {
+            createCanvas(600, 500);
+            noCursor();
+            ballX = random(width);
+            ballY = random(height / 2);
+            m = minute(0);
+            paused = false;
+        }
+
+        function draw() {
+          //calls back the four functions (that have already been defined) to make it more efficient
+            background("Black");
+            moveBall();
+            checkCollide();
+            drawPaddle();
+            drawBall();
+            r= random(0,255);
+            g= random(0,255);
+            b= random(0,255);
+            fill("white")
+            textSize(15);
+            text("Minute(s) Played: " + m, 5, 40); //every minute the game is refreshed, the timecode will go up.
+            
+           
+            
+            
+        }
+
+        function moveBall() {
+            ballX = ballX + ballSpeedX; //moves the ball from left to right
+            ballY = ballY + ballSpeedY; // and top to bottom
+
+            console.log("ballSpeedX: " + ballSpeedX + 
+                               ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            if (ballX < 0 || ballX > width) {  //moves to the left 
+                ballSpeedX = ballSpeedX * -1;  //side of the screen
+            }
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1;
+            }
+            if (ballY > height - paddleHeight) { //sends the ball
+                if (ballX > mouseX && ballX < mouseX + 200) { //back to the top
+                    ballSpeedY = ballSpeedY * -1; //creating the illusion of the ball reflecting off the materials
+                }
+                else {
+                  fill("Red")
+                  textSize(30);
+                    text("YOU LOST", width / 2, height / 2); //if you don't hit the ball
+                    noLoop(); //you will lose 
+                }
+            }
+        }
+
+        function drawBall() {
+            fill(r,g,b);
+            strokeWeight(2);  //draws the ball
+            //rect(ballX, ballY, 20, 20); //that is being bounced off the walls
+            textBall();
+        }
+
+        function drawPaddle() {
+            fill("white")
+            strokeWeight(4); //creates the paddle
+            rect(mouseX, height - paddleHeight - 4, 200, paddleHeight); //at the bottom of the screen
+        }
+        
+        function textBall(){ //replaces typicall ball
+            textSize(35); //with text that says ball
+            textFont("Georgia"); // and uses a new font
+            text("BALL",ballX, ballY)
+        }
+        
+        function mousePressed() {
+            if (paused=true){ //when the mouse is pressed
+                paused = false // the game stops/pauses
+                xSpeed =0;
+                  
+              }
+              else {
+               xSpeed *= -1
+              }
+              if (paused=true){
+                  paused = blue
+                  xSpeed *=0;
+              }
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/jasonsimon1/p5js/blob/gh-pages/pongremix.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
