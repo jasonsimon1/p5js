@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+      var x;
+      var y;
+      var w;
+      var h;
+      var dirX;
+      var dirY;
+      var xSpeed;
+      var r,g,b;
+      
+        function setup() {
+            createCanvas(800,700);
+            rectMode(CENTER);
+            x = 0;
+            y = 0;
+            w = 100;
+            h = 100;
+            dirX = 1;
+            dirY = 1;
+            xSpeed = 5;
+            r= random(0,255);
+            g= random(0,255);
+            b= random(0,255);
+            x = width / 2;
+            y = height;
+        }
+        
+        function draw() {
+            //These will continue to be in the canvas, nothing you press will change that.
+            background(220);
+            Waldo();
+            Waldoo();
+            Waldooo();
+            Circle();
+            textSize(24);
+            textFont("Georgia");
+            fill(255,0,0)
+            text("Where's Waldo?",320,30)
+            
+            textSize(16);
+            textFont("Trebuchet MS");
+            fill("black");
+            text("Waldo is 'hidden' and you have to find him. It's not as obvious as it seems.. click twice to register your answer",4,698);
+            
+  //Triangle Model
+            translate(width/2, height/2);
+	        fill(192,192,192);
+	        strokeWeight(2)
+	        //stroke(169,169,169);
+	        stroke(r,g,b);
+	     for (var i=0; i < 30; i++) {
+	    	push();
+	    	rotate(i / 5.0);
+	     	scale(i / 8.0);
+	    	triangle(0, -100, -10, 100, 10, 100);
+	    	pop(); 
+        } 
+    	
+ //Circle Roaming Around	
+    	function Circle(){
+    	ellipse(x,y,w,h)
+        if(x > width - w || x < 0){
+            dirX = dirX * -1 
+        }
+        if( y > height - h|| y < 0 ){
+          dirY = dirY * -1
+        }
+        
+        x += dirX
+        y += dirY
+    	}
+    	
+ //Functions   	
+    	function Waldo(){
+            strokeWeight(2)
+            stroke(255,100,40);
+            fill("white");
+            ellipse(512,20,20,20)
+            fill("black");
+            textSize(12);
+    	    text("W",506,24)
+        }
+        
+        function Waldoo(){
+            strokeWeight(2)
+            stroke(255,180,100)
+            fill("white")
+            ellipse(330,188,10,10)
+            fill("black")
+            textSize(12);
+            text("W",324,193)
+        }
+        
+        function Waldooo(){
+            strokeWeight(2)
+            stroke(255,180,100)
+            fill("white")
+            ellipse(703,496,25,25)
+            fill("black")
+            textSize(12);
+            text("V V",697,496)
+        }
+        
+           function mousePressed(){
+        if (Waldo=true){ //when the mouse is pressed
+                Waldo = false // the game checks to see if Waldo is found
+                textSize(24) // If hes found
+                fill("black") // You will be told you won
+                text("You found him!",20,20);
+                  
+        }
+              else {
+               text("Wrong",20,20); //If you dont find him, you lose.
+        }
+
+           }
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/jasonsimon1/p5js/blob/master/objects.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+
+</html>
